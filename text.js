@@ -176,6 +176,14 @@ define(['module'], function (module) {
             //inside a body tag in an HTML string. For XML/SVG content it means
             //removing the <?xml ...?> declarations so the content can be inserted
             //into the current doc without problems.
+            
+            // in wilton env: load and return
+            if ("function" === typeof(WILTON_wiltoncall)) {
+                 var wiltonLoader = WILTON_requiresync("wilton/loader");
+                 var wiltonText = wiltonLoader.loadModuleResource(name);
+                 onLoad(wiltonText);
+                 return;
+            }
 
             // Do not bother with the work if a build and text will
             // not be inlined.
